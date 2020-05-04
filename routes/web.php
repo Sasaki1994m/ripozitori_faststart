@@ -55,7 +55,7 @@ switch ($params[0]){
       $usersController->form();
     break;
     case "logon":
-      $usersController->logon($params[1]);
+      $usersController->logon();
     break;
 }
 

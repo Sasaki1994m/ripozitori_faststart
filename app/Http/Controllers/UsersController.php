@@ -30,20 +30,29 @@
             }
 
         }
-    
-                   
+          
         public function logon()
         {
+            session_start();
             $values = $this->init();            
             include($this->models.'User.php');
             $usermodel = new User();
             $result = $usermodel->form();
-            $post =$result[0];
-            $error= $result[1];
-            if(count($result) >0){
-                header('Location: http://192.168.33.10/');                
-            }else{
+            
+            var_dump($result);
+            if (!isset($result['name'])){
+                echo '名前とパスワードが間違っています。';
+                return false;
+            }
+            if(count($result) > 0){
+                $_session['name'] = $result['id'];
+                $_session['password'] = $result['password'];
+                echo'ログインしました';
                 include($this->views."posts/touroku.php");
+                             
+            }else{
+                header('Location: http://192.168.33.10/logon');  
+            
             }
 
         }

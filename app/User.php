@@ -69,42 +69,56 @@
         return $result;
 
       }
-    
       public function logon() {
-        $post = array(
-          "name" =>$_POST['name'],
-          "password" =>$_POST['password']
-        );
-        // var_dump(__LINE__);
-        $error = $this->validation($post['name'], $post['password']);
-        // var_dump($error);die;
+        $dbh = $this->db_access();
+        
+        $sql = 'SELECT * FROM users WHERE name = :name, password = :password';
+        $stmt = $dbh->prepare($sql);
+        $stmt->bindValue(':name', $post['name'], PDO::PARAM_STR);
+        $stmt->bindValue(':password', $post['password'], PDO::PARAM_STR);
 
-          if (count($error)){
-            //createにエラーログを飛ばす
-          }else {
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
+        
+        return $result;
+      
+      // public function logn() {
+      //   $post = array(
+      //     "name" =>$_POST['name'],
+      //     "password" =>$_POST['password']
+      //   );
+      //   // var_dump(__LINE__);
+      //   $error = $this->validation($post['name'], $post['password']);
+      //   // var_dump($error);die;
 
-            $dbh = $this->db_access();
-            try{
-              $dbh->beginTransaction();
-              $sql = 'SELECT INTO users(name, password) VALUES(:name, :password)';
-              $stmt = $dbh->prepare($sql);
-              $stmt->bindValue(':name', $post['name'], PDO::PARAM_STR);
-              $stmt->bindValue(':password', $post['password'], PDO::PARAM_STR);
-              $stmt->execute();
+      //     if (count($error)){
+      //       //createにエラーログを飛ばす
+      //     }else {
 
-              $dbh->commit();
+      //       $dbh = $this->db_access();
+      //       try{
+      //         $dbh->beginTransaction();
+      //         $sql = 'SELECT * FROM users WHERE name = :name , password = :password';
+      //         // $sql = 'SELECT * FROM posts WHERE id = :id';
+      //         $stmt = $dbh->prepare($sql);
+      //         $stmt->bindValue(':name', $post['name'], PDO::PARAM_STR);
+      //         $stmt->bindValue(':password', $post['password'], PDO::PARAM_STR);
+      //         // execute=実行する
+      //         $stmt->execute();
+      //          //fetch=取得する
+      //         $result = $stmt->fetch();
+      //       }catch(PDOException $Exceptipn){
+      //         $stmt->rollback();
+      //       }
+      //   }  
+      //     $result = array($post, $error);
 
-            }catch(PDOException $Exceptipn){
-              $stmt->rollback();
-            }
-        }  
-          $result = array($post, $error);
-
-          return $result;
+      //     return $result;
 
       
            
-           
+         
         
       }
     
