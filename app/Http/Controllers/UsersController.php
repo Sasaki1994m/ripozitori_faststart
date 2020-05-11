@@ -26,7 +26,8 @@
             if(count($error)){
                 include($this->views."posts/touroku.php");
             }else{
-                header('Location: http://192.168.33.10/');
+                echo "登録完了しました";
+                include($this->views."posts/top.php");
             }
 
         }
@@ -34,27 +35,21 @@
         public function logon()
         {
             session_start();
-            $values = $this->init();            
-            include($this->models.'User.php');
+            $values = $this->init();           
+            include($this->models.'User.php'); 
             $usermodel = new User();
-            $result = $usermodel->form();
-            
-            var_dump($result);
-            if (!isset($result['name'])){
-                echo '名前とパスワードが間違っています。';
-                return false;
+            $result = $usermodel->logon();
+            if(count($result) >0){
+                $_SESSION["name"] =$result[0]["name"];
+                // $_SESSION["password"] =$result[0]["password"];
             }
-            if(count($result) > 0){
-                $_session['name'] = $result['id'];
-                $_session['password'] = $result['password'];
-                echo'ログインしました';
-                include($this->views."posts/touroku.php");
-                             
+            if(isset($_SESSION["name"]))
+            // if($_SESSION['name'] > 0)
+            {
+                header('Location: http://192.168.33.10/');
             }else{
-                header('Location: http://192.168.33.10/logon');  
-            
+                include($this->views."posts/login.php");
             }
-
         }
         public function top()
         {

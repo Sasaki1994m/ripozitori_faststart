@@ -27,7 +27,7 @@
                       id="name"
                       name="name"
                       class="form-control"
-                      value="<?php echo $post["name"];?>"
+                      value="<?php echo htmlspecialchars( $post["name"],ENT_QUOTES, "UTF-8");?>"
                       type="text"
               >
             </div>
@@ -40,7 +40,7 @@
                       name="password"
                       class="form-control"
                       rows="10"
-              ><?php echo $post["password"];?></textarea>
+              ><?php echo htmlspecialchars($post["password"],ENT_QUOTCES, "UTF-8");?></textarea>
             </div>
             <div>
             <a class="btn btn-secondary" href="top">

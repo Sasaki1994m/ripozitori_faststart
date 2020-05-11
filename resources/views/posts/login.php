@@ -9,7 +9,7 @@
     <div class="container my-4">
         <diV class="border p-4">
           <h5 class="mb-4">
-          新規登録作成
+          ログイン画面
           </h5>
 
           <h5 class="mb-4 text-danger">
@@ -27,7 +27,7 @@
                       id="name"
                       name="name"
                       class="form-control"
-                      value="<?php echo $post["name"];?>"
+                      value="<?php echo htmlspecialchars( $post["name"],ENT_QUOTES, "UTF-8");?>"
                       type="text"
               >
             </div>
@@ -40,18 +40,16 @@
                       name="password"
                       class="form-control"
                       rows="10"
-              ><?php echo $post["password"];?></textarea>
+              ><?php htmlspecialchars($post["password"],ENT_QUOTCES, "UTF-8");?></textarea>
             </div>
             <div>
             <a class="btn btn-secondary" href="top">
-            
             キャンセル
             </a>
             <button type="submit" class="btn btn-success">
             送信する
             </div>
             </fildset>
-            <a href="/touroku">新規会員登録はこちら</a>
 
           </form>
         </diV>

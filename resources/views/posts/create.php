@@ -27,7 +27,7 @@
                       id="title"
                       name="title"
                       class="form-control"
-                      value="<?php echo $post["title"];?>"
+                      value="<?php echo htmlspecialchars( $post["title"],ENT_QUOTES, "UTF-8");?>"
                       type="text"
               >
             </div>
@@ -41,7 +41,7 @@
                       name="body"
                       class="form-control"
                       rows="10"
-              ><?php echo $post["body"];?></textarea>
+              ><?php echo htmlspecialchars($post["body"],ENT_QUOTCES, "UTF-8");?></textarea>
             </div>
 
             <div>

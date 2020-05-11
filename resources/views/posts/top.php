@@ -20,6 +20,5 @@ session_start(); // セッション開始
  
     <p><a href="/touroku">新規会員登録</a></p>
     <p><a href="/login">ログイン</a></p>
-    <p><a href="/logout">ログアウト</a><p>
   </body>
 </html>

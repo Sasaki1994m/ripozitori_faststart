@@ -16,8 +16,10 @@ $postsController =new PostsController($models, $views);
 include($webroot."/../app/Http/Controllers/UsersController.php");
 $usersController =new UsersController($models, $views); 
 
-switch ($params[0]){
-  
+
+session_start();
+switch ($params[0])
+  {
     case "":
       $postsController->index();
       break;
